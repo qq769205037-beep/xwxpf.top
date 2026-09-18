@@ -5,6 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مركز أبحاث السيولة المؤسسية في السوق السعودي (TASI)</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18450562699"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'AW-18450562699');
+
+      // 稳定防丢单、防卡死、单次锁定的出站点击回传函数
+      var isRedirecting = false;
+      function gtag_report_conversion(url, placement) {
+        if (isRedirecting) return false;
+        isRedirecting = true;
+
+        function navigate() {
+          if (typeof(url) !== 'undefined' && url) {
+            window.location.href = url;
+          }
+        }
+
+        try {
+          gtag('event', 'conversion', {
+              'send_to': 'AW-18450562699/67JdCNjemvwcEIv99N1E',
+              'event_label': placement || 'unknown',
+              'event_callback': function() {
+                navigate();
+              }
+          });
+        } catch(e) {
+          navigate();
+        }
+
+        // 500ms 超时强制跳转兜底
+        setTimeout(navigate, 500);
+        return false;
+      }
+    </script>
 </head>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-emerald-500 selection:text-white">
 
@@ -54,7 +93,10 @@
         </div>
 
         <div class="space-y-2 pt-2">
-            <a href="https://chat.whatsapp.com/G2jiDHOInvWFPVr0dZjlQQ" class="block w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 px-6 rounded-2xl text-center transition duration-200 shadow-lg shadow-emerald-900/30 text-sm tracking-wide">
+            <!-- 绑定回传函数，添加超时跳转与转化归因标签 -->
+            <a href="https://chat.whatsapp.com/G2jiDHOInvWFPVr0dZjlQQ" 
+               onclick="return gtag_report_conversion(this.href, 'liquidity_cta');"
+               class="block w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 px-6 rounded-2xl text-center transition duration-200 shadow-lg shadow-emerald-900/30 text-sm tracking-wide">
                 انضم إلى مجموعة الأبحاث والتحليل الأكاديمي (واتساب) 💬
             </a>
             <p class="text-[10px] text-center text-slate-500">
